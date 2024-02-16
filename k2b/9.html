@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .slider {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            display: flex;
+            width: 300%;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .slide {
+            width: 33.33%;
+            height: 300px;
+            background: #ddd;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .arrow.left {
+            left: 10px;
+        }
+
+        .arrow.right {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <i class="arrow left"><</i>
+        <div class="slide-container">
+            <div class="slide"><img src="img.jpg" alt="Morley's (East Street)"></div>
+            <div class="slide"><img src="img.jpg" alt="Morley's (East Street)"></div>
+            <div class="slide"><img src="img.jpg" alt="Morley's (East Street)"></div>
+        </div>
+        <i class="arrow right">></i>
+    </div>
+
+    <script>
+        const slider = document.querySelector('.slider');
+        const slideContainer = document.querySelector('.slide-container');
+        const slides = Array.from(document.querySelectorAll('.slide'));
+        const leftArrow = document.querySelector('.arrow.left');
+        const rightArrow = document.querySelector('.arrow.right');
+
+        let index = 0;
+
+        function moveSlide() {
+            slideContainer.style.transform = `translateX(${-index * 100}%)`;
+        }
+
+        leftArrow.addEventListener('click', () => {
+            index = index <= 0 ? slides.length - 1 : index - 1;
+            moveSlide();
+        });
+
+        rightArrow.addEventListener('click', () => {
+            index = index >= slides.length - 1 ? 0 : index + 1;
+            moveSlide();
+        });
+    </script>
+</body>
+</html>
